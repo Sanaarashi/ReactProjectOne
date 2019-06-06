@@ -16,10 +16,10 @@ const {cash, eu, rus, eu: [untrusted]} = sponsors;
 
 let money = cash.reduce((a, b) => a + b);
 
-const makeBusiness = (owner = 'Sam', CEO = 'Victor', money = 0, ...employees) => {
+const makeBusiness = ({owner = 'Sam', CEO = 'Victor', money, employees} = {}) => {
     const sumSponsors = [...eu,  ...rus, 'unexpected sponsor'].join(' ');
     console.log(`We have a business. Owner: ${owner}, CEO: ${CEO}. Our budget: ${money}. And our employees: ${employees}`);
     console.log(`And we have a sponsors: \n${sumSponsors}`);
     console.log(`Note. Be careful with ${untrusted}. It's a huge risk.`);
 }
-makeBusiness('Sam', 'Victor', money, employees);
+makeBusiness({money, employees});
