@@ -1,9 +1,8 @@
 'use strict';
 
-let employers = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'],
-    employersNames = [];
+let employees = ['Alex', '', 'ludmila', 'Viktor', '', 'oleg', 'iNna', 'Ivan', 'Alex', 'Olga', ' Ann'];
 
-employersNames = employers
+employees = employees
     .filter(item => {return item !='';})
     .map(item => {return item.toLowerCase().trim();});
 
@@ -13,21 +12,14 @@ const sponsors = {
     rus: ['RusAuto', 'SBO']
 };
 
-const calcCash = (own = 0) => {
-    let total = own;
-    total = cash.reduce((a, b) => a + b);
-    return total;
-}
-
 const {cash, eu, rus, eu: [untrusted]} = sponsors;
 
-let money = calcCash(cash);
+let money = cash.reduce((a, b) => a + b);
 
-const makeBusiness = (cash, owner = 'Sam', CEO = 'Victor', ...emp) => {
+const makeBusiness = (owner = 'Sam', CEO = 'Victor', money = 0, ...employees) => {
     const sumSponsors = [...eu,  ...rus, 'unexpected sponsor'].join(' ');
-    console.log(`We have a business. Owner: ${owner}, CEO: ${CEO}. Our budget: ${cash}. And our employees: ${emp}`);
+    console.log(`We have a business. Owner: ${owner}, CEO: ${CEO}. Our budget: ${money}. And our employees: ${employees}`);
     console.log(`And we have a sponsors: \n${sumSponsors}`);
     console.log(`Note. Be careful with ${untrusted}. It's a huge risk.`);
 }
-
-makeBusiness(money, undefined, undefined, employersNames);
+makeBusiness('Sam', 'Victor', money, employees);
