@@ -6,30 +6,14 @@ export default class PostListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            important: false,
-            like: false,
             edit: false,
             edited: true
         }
         this.editedText = this.props.label;
         this.postTime = new Date().toLocaleString();
-        this.onImportant = this.onImportant.bind(this);
-        this.onLike = this.onLike.bind(this);
         this.onEdit = this.onEdit.bind(this);
     }
 
-    onImportant() {
-        this.setState(({important}) => ({
-            important: !important
-        }))
-    }
-
-    onLike() {
-        this.setState(({like}) => ({
-            like: !like
-        }))
-    }
-    
     onEdit() {
         this.setState(({edit, edited}) => ({
             edit: !edit,
@@ -45,9 +29,10 @@ export default class PostListItem extends Component {
     }
 
     showText = () => {
+        const {onToggleLiked} = this.props;
         return (
             <span className="app-list-item-label"
-            onClick={this.onLike}>
+            onClick={onToggleLiked}>
                 {this.editedText}
             </span>
         )
@@ -63,8 +48,8 @@ export default class PostListItem extends Component {
     }
 
     render () {
-        const {onDelete} = this.props;
-        const {important, like, edit} = this.state;
+        const {onDelete, onToggleImportant, important, like} = this.props;
+        const {edit} = this.state;
         let classNames = 'app-list-item d-flex justify-content-between';
 
         if (important) {
@@ -88,7 +73,7 @@ export default class PostListItem extends Component {
                     <button 
                         type="button" 
                         className="btn-star btn-sm"
-                        onClick={this.onImportant}>
+                        onClick={onToggleImportant}>
                         <i className="fa fa-star"></i>
                     </button>
                     <DeleteModal
