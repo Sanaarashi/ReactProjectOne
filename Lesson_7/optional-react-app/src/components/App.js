@@ -1,20 +1,25 @@
 import React, {Component} from 'react';
-import GetData from '../services/getData';
+import styled from 'styled-components';
+import Bestellers from './bestseller';
+import Goods from './goods';
+import Coffee from './coffee';
+
+import './app.css';
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: wrap;
+`;
 
 export default class App extends Component {
-  GetData = new GetData();
-
-  state = {
-    bestellers: []
-  }
-
-  
 
   render() {  
     return (
-      <div className="App">
-        <p>Hello there</p>
-      </div>
+      <Container className="App">
+      <Bestellers/>
+      <Goods/>
+      <Coffee/>
+      </Container>
     );
   }
 }
